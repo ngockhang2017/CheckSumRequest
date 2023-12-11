@@ -14,19 +14,26 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     RequestManager requestManager;
+//    connect(&requestManager, SIGNAL(responseReceived(const QString &response)), this, SLOT(ReciverReport(const QString &response)) );
+    // Gửi một số request
+    requestManager.sendRequest("https://reqres.in/api/users/2");
+    requestManager.sendRequest("https://jsonplaceholder.typicode.com/posts/2");
 
-       // Gửi một số request
-       requestManager.sendRequest("https://jsonplaceholder.typicode.com/posts/1");
-       requestManager.sendRequest("https://jsonplaceholder.typicode.com/posts/2");
+//     Kết nối tín hiệu để xử lý response
+           QObject::connect(&requestManager, &RequestManager::responseReceived, [](const QString &response) {
+               qDebug() << "Received response:" << response;
+           });
 
-       // Kết nối tín hiệu để xử lý response
-       QObject::connect(&requestManager, &RequestManager::responseReceived, [](const QString &response) {
-           qDebug() << "Received response:" << response;
-       });
+
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::ReciverReport(const QString &response)
+{
+    qDebug() << "Response <<< " << response << endl;
 }
 

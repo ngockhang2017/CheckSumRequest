@@ -22,6 +22,7 @@ void RequestManager::onRequestFinished(QNetworkReply *reply)
     if (reply->error() == QNetworkReply::NoError) {
         // Đọc response và gửi tín hiệu
         QString response = reply->readAll();
+        qDebug() << "HUYNH PHAN NGOC KHANG";
         emit responseReceived(response);
     } else {
         qDebug() << "Error:" << reply->errorString();
