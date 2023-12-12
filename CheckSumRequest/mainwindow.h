@@ -5,6 +5,7 @@
 #include<workerthread.h>
 #include<requestmanager.h>
 #include<QDebug>
+#include<QFont>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -18,7 +19,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 public slots:
-    void ReciverReport(const QString &response);
+    void ReciverReport( QString response);
 
 private:
     Ui::MainWindow *ui;

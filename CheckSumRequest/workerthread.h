@@ -7,13 +7,7 @@ class WorkerThread : public QThread
 {
 public:
     WorkerThread();
-    void run() override {
-           // Thực hiện công việc trong đây
-           for (int i = 0; i < 5; ++i) {
-               qDebug() << "Thread" << currentThreadId() << "Working" << i;
-               sleep(1); // Simulate work
-           }
-       }
+    void run() override;
 };
 
 #endif // WORKERTHREAD_H

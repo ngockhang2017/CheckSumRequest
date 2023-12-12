@@ -12,10 +12,11 @@ class RequestManager : public QObject
     Q_OBJECT
 public:
     explicit RequestManager(QObject *parent = nullptr);
-    void sendRequest(const QString &url);
+
+    void sendRequest( QString url);
 
 signals:
-    void responseReceived(const QString &response);
+    void responseReceived( QString response);
 
 private slots:
     void onRequestFinished(QNetworkReply *reply);

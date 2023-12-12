@@ -13,16 +13,16 @@ MainWindow::MainWindow(QWidget *parent)
         thread->start();
     }
 
-    RequestManager requestManager;
-//    connect(&requestManager, SIGNAL(responseReceived(const QString &response)), this, SLOT(ReciverReport(const QString &response)) );
+    RequestManager *requestManager = new RequestManager();
+    //    connect(&requestManager, SIGNAL(responseReceived(const QString &response)), this, SLOT(ReciverReport(const QString &response)) );
     // Gửi một số request
-    requestManager.sendRequest("https://reqres.in/api/users/2");
-    requestManager.sendRequest("https://jsonplaceholder.typicode.com/posts/2");
+    //    requestManager->sendRequest("http://192.168.179.195:3030/");
+    for(int i = 1 ; i <= 100 ; ++i)
+    {
+        requestManager->sendRequest("http://192.168.179.195:3030/fibonacci_NodeJs/" + QString::number(i));
+    }
 
-//     Kết nối tín hiệu để xử lý response
-           QObject::connect(&requestManager, &RequestManager::responseReceived, [](const QString &response) {
-               qDebug() << "Received response:" << response;
-           });
+    connect(requestManager, SIGNAL(responseReceived(QString ) ), this, SLOT(ReciverReport(QString ) ));
 
 
 }
@@ -32,8 +32,9 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::ReciverReport(const QString &response)
+void MainWindow::ReciverReport( QString response)
 {
     qDebug() << "Response <<< " << response << endl;
+    ui->textEdit->append(response);
 }
-
+//trong qt c++, cách tạo 100 request đến một địa chỉ và lắng nghe các response trả về. từ đó tính số lượng các request thành công và số lượng không

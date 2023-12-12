@@ -3,11 +3,14 @@
 RequestManager::RequestManager(QObject *parent) : QObject(parent)
 {
     networkManager = new QNetworkAccessManager(this);
-    connect(networkManager, &QNetworkAccessManager::finished, this, &RequestManager::onRequestFinished);
+//    connect(networkManager, &QNetworkAccessManager::finished, this, &RequestManager::onRequestFinished);
+    connect(networkManager, SIGNAL(finished(QNetworkReply*)),this, SLOT(onRequestFinished(QNetworkReply*)));
+
 }
 
-void RequestManager::sendRequest(const QString &url)
+void RequestManager::sendRequest( QString url)
 {
+//      QNetworkRequest request(QUrl("http://0.0.0.0:8081/DOA_value.html"));
     QNetworkRequest request;
     request.setUrl(QUrl(url));
 //    QNetworkRequest request(QUrl(url));
@@ -19,13 +22,17 @@ void RequestManager::sendRequest(const QString &url)
 
 void RequestManager::onRequestFinished(QNetworkReply *reply)
 {
-    if (reply->error() == QNetworkReply::NoError) {
+    if (reply->error() == QNetworkReply::NoError)
+    {
         // Đọc response và gửi tín hiệu
         QString response = reply->readAll();
-        qDebug() << "HUYNH PHAN NGOC KHANG";
+//        qDebug() << "HUYNH PHAN NGOC KHANG";
         emit responseReceived(response);
-    } else {
+    }
+    else
+    {
         qDebug() << "Error:" << reply->errorString();
+        emit responseReceived("Error:" + reply->errorString());
     }
 
     // Loại bỏ reply đã hoàn thành để tránh rò rỉ bộ nhớ

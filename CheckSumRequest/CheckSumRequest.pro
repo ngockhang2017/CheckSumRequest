@@ -19,6 +19,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     requestmanager.cpp \
+    test.cpp \
     workerthread.cpp
 
 HEADERS += \
