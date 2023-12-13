@@ -25,6 +25,7 @@ private:
     QNetworkAccessManager *networkManager;
     QList<QNetworkReply *> currentReplies;
 
+
 };
 
 #endif // REQUESTMANAGER_H

@@ -21,7 +21,12 @@ public:
 public slots:
     void ReciverReport( QString response);
 
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
+    QString str_URL;
+    int number_of_thread, numberRamp;
 };
 #endif // MAINWINDOW_H

@@ -23,8 +23,6 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     connect(requestManager, SIGNAL(responseReceived(QString ) ), this, SLOT(ReciverReport(QString ) ));
-
-
 }
 
 MainWindow::~MainWindow()
@@ -38,3 +36,12 @@ void MainWindow::ReciverReport( QString response)
     ui->textEdit->append(response);
 }
 //trong qt c++, cách tạo 100 request đến một địa chỉ và lắng nghe các response trả về. từ đó tính số lượng các request thành công và số lượng không
+
+void MainWindow::on_pushButton_clicked()  //RUN
+{
+    this->str_URL = "http://" + ui->lineEdit_ip->text() + ":" + ui->lineEdit_port->text() + "/" + ui->lineEdit_path->text();
+    this->number_of_thread = ui->lineEdit_threads->text().toInt();
+    this->numberRamp = ui->lineEdit_rampup->text().toInt();//số lượng request tăng trong một thời gian rampup
+
+
+}
