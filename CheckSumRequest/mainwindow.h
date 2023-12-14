@@ -18,11 +18,11 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-public slots:
-    void ReciverReport( QString response);
 
-private slots:
+public slots:
     void on_pushButton_clicked();
+    void Get_response_from_thread(QString str);
+    void Get_Non_response_from_thread(QString str);
 
 private:
     Ui::MainWindow *ui;

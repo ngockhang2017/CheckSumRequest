@@ -3,9 +3,10 @@
 RequestManager::RequestManager(QObject *parent) : QObject(parent)
 {
     networkManager = new QNetworkAccessManager(this);
-//    connect(networkManager, &QNetworkAccessManager::finished, this, &RequestManager::onRequestFinished);
-    connect(networkManager, SIGNAL(finished(QNetworkReply*)),this, SLOT(onRequestFinished(QNetworkReply*)));
+    connect(networkManager, &QNetworkAccessManager::finished,this, &RequestManager::onRequestFinished);
 
+     emit responseReceived("responseReceived");
+     emit responseNon_Received("Error: responseNon_Received");
 }
 
 void RequestManager::sendRequest( QString url)
@@ -22,17 +23,16 @@ void RequestManager::sendRequest( QString url)
 
 void RequestManager::onRequestFinished(QNetworkReply *reply)
 {
-    if (reply->error() == QNetworkReply::NoError)
+    if (reply->error() == QNetworkReply::NoError)  //   GỬI TÍN HIỆU VỀ MAIN WINDOW --> THÀNH CÔNG
     {
         // Đọc response và gửi tín hiệu
         QString response = reply->readAll();
-//        qDebug() << "HUYNH PHAN NGOC KHANG";
         emit responseReceived(response);
     }
-    else
+    else  //GỬI TÍN HIỆU VỀ MAIN WINDOW --> THẤT BẠI
     {
         qDebug() << "Error:" << reply->errorString();
-        emit responseReceived("Error:" + reply->errorString());
+        emit responseNon_Received("Error: " + reply->errorString());
     }
 
     // Loại bỏ reply đã hoàn thành để tránh rò rỉ bộ nhớ

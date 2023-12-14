@@ -12,7 +12,6 @@ class RequestManager : public QObject
     Q_OBJECT
 public:
     explicit RequestManager(QObject *parent = nullptr);
-
     void sendRequest( QString url);
 
 signals:
