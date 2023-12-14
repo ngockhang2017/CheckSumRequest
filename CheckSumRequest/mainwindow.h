@@ -6,6 +6,7 @@
 #include<requestmanager.h>
 #include<QDebug>
 #include<QFont>
+#include <Windows.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -18,7 +19,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
+    QString getCPUInfo();
 public slots:
     void on_pushButton_clicked();
     void Get_response_from_thread(QString str);

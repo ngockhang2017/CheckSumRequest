@@ -17,7 +17,6 @@ void RequestManager::sendRequest( QString url)
 //    QNetworkRequest request(QUrl(url));
     QNetworkReply *reply = networkManager->get(request);
 
-    // Lưu trữ thông tin về reply để theo dõi khi response về
     currentReplies.append(reply);
 }
 

@@ -1,31 +1,28 @@
 #include "workerthread.h"
 
-WorkerThread::WorkerThread()
+WorkerThread::WorkerThread(const QString &url, QObject *parent)
+    : QThread(parent), url(url)
 {
-    mRequestManager = new RequestManager();
-//    connect(mRequestManager, SIGNAL(responseReceived( QString)), this, SLOT(GetReportFromResponse(QString)));
-//    connect(mRequestManager, SIGNAL(responseNon_Received( QString)), this, SLOT(GetReportFromNon_Response(QString)));
 
-    connect(mRequestManager, &RequestManager::responseReceived, this, &WorkerThread::GetReportFromResponse);
-    connect(mRequestManager, &RequestManager::responseNon_Received, this, &WorkerThread::GetReportFromNon_Response);
 }
 
-void WorkerThread::run()
-{
-    qDebug() << "Thread" << currentThreadId() << "Working" ;
-    mRequestManager->sendRequest(this->url_str);
+void WorkerThread::run() {
+    QNetworkAccessManager manager;
+    QUrl url_address = QUrl(url);
+    QNetworkRequest request(url_address);
 
-    sleep(this->timer_ramp_up);//thực hiện 1 request mỗi timer thời gian (thời gian ramp up)
+    // Thực hiện request HTTP
+    QNetworkReply *reply = manager.get(request);
+
+    QEventLoop loop;
+    connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    loop.exec();
+
+    // Kiểm tra kết quả
+    if (reply->error() == QNetworkReply::NoError) {
+        emit success(reply->readAll());
+    } else {
+        emit fail(reply->errorString());
+    }
+    reply->deleteLater();
 }
-
-void WorkerThread::GetReportFromResponse(QString report)
-{
-   // emit Susscess(report);
-}
-
-
-void WorkerThread::GetReportFromNon_Response(QString report)
-{
-   // emit Fail(report);
-}
-

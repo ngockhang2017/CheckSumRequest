@@ -1,31 +1,27 @@
 #ifndef WORKERTHREAD_H
 #define WORKERTHREAD_H
-#include<qthread.h>
-#include<QDebug>
-#include<QTimer>
-#include<requestmanager.h>
-#include<QString>
+#include <QCoreApplication>
+#include <QThread>
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include <QDebug>
 
 class WorkerThread : public QThread
 {
+    Q_OBJECT
 public:
-    WorkerThread();
+    explicit WorkerThread(const QString& url, QObject *parent = nullptr);
 
+signals:
+    void success(const QString& str);
+    void fail(const QString& str);
+
+protected:
     void run() override;
 
-//signals:
-// void Susscess(QString str);
-// void Fail(QString errorMessage);
-
-public slots:
- void GetReportFromResponse(QString);
- void GetReportFromNon_Response(QString);
-
-public:
-    int timer_ramp_up;
-    //     QTimer *timer_request;
-    RequestManager *mRequestManager;
-    QString url_str;
+private:
+    QString url;
 };
 
 #endif // WORKERTHREAD_H
