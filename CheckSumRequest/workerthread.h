@@ -6,6 +6,7 @@
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include <QDebug>
+#include<QElapsedTimer>
 
 class WorkerThread : public QThread
 {
@@ -14,7 +15,7 @@ public:
     explicit WorkerThread(const QString& url, QObject *parent = nullptr);
 
 signals:
-    void success(const QString& str);
+    void success(const QString& str, int rtt);
     void fail(const QString& str);
 
 protected:
@@ -22,6 +23,7 @@ protected:
 
 private:
     QString url;
+    QElapsedTimer timer;
 };
 
 #endif // WORKERTHREAD_H

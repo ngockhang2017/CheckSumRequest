@@ -82,7 +82,7 @@ color: rgb(255, 255, 255);</string>
           <string notr="true">color: rgb(255, 255, 255);</string>
          </property>
          <property name="text">
-          <string>192.168.43.50</string>
+          <string>192.168.100.26</string>
          </property>
         </widget>
        </item>
@@ -279,7 +279,7 @@ color: rgb(255, 255, 255);</string>
        <item>
         <widget class="QTextEdit" name="textEdit">
          <property name="styleSheet">
-          <string notr="true">color: rgb(102, 255, 0);</string>
+          <string notr="true"/>
          </property>
         </widget>
        </item>
@@ -299,7 +299,7 @@ color: rgb(255, 255, 255);</string>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_3">
              <item>
-              <widget class="QLabel" name="label_8">
+              <widget class="QLabel" name="label_rps">
                <property name="font">
                 <font>
                  <pointsize>9</pointsize>
@@ -309,12 +309,12 @@ color: rgb(255, 255, 255);</string>
                 <string notr="true">color: rgb(255, 255, 255);</string>
                </property>
                <property name="text">
-                <string>REQUEST PER SECOND [RPS]:   72  minisecond</string>
+                <string>REQUEST PER SECOND [RPS]:   ...  request</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="label_9">
+              <widget class="QLabel" name="label_RTT">
                <property name="font">
                 <font>
                  <pointsize>9</pointsize>
@@ -324,12 +324,29 @@ color: rgb(255, 255, 255);</string>
                 <string notr="true">color: rgb(255, 255, 255);</string>
                </property>
                <property name="text">
-                <string>ROUND TRIP TIME [RTT]:     125    minisecond</string>
+                <string>ROUND TRIP TIME [RTT]:     ...    milisecond</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="label_10">
+              <widget class="QLabel" name="label_suss_fail">
+               <property name="font">
+                <font>
+                 <pointsize>9</pointsize>
+                 <weight>50</weight>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color: rgb(255, 255, 255);</string>
+               </property>
+               <property name="text">
+                <string>Susscess: ...    ----  Fail: ...</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_error">
                <property name="font">
                 <font>
                  <pointsize>9</pointsize>
@@ -356,7 +373,7 @@ color: rgb(255, 255, 255);</string>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_4">
              <item>
-              <widget class="QLabel" name="label_11">
+              <widget class="QLabel" name="label_numberThr">
                <property name="font">
                 <font>
                  <pointsize>9</pointsize>
@@ -366,7 +383,25 @@ color: rgb(255, 255, 255);</string>
                 <string notr="true">color: rgb(255, 255, 255);</string>
                </property>
                <property name="text">
-                <string>CPU THREADS:   8   Threads</string>
+                <string>CPU THREADS:   ...   Threads</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_numberof_processor">
+               <property name="font">
+                <font>
+                 <family>MS Shell Dlg 2</family>
+                 <pointsize>9</pointsize>
+                 <weight>50</weight>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color: rgb(255, 255, 255);</string>
+               </property>
+               <property name="text">
+                <string>Number of processor: ...</string>
                </property>
               </widget>
              </item>
@@ -381,7 +416,7 @@ color: rgb(255, 255, 255);</string>
                 <string notr="true">color: rgb(255, 255, 255);</string>
                </property>
                <property name="text">
-                <string>CPU PROCESSING:   14    %</string>
+                <string>CPU PROCESSING:   ...    %</string>
                </property>
               </widget>
              </item>
